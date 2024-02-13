@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  librechat:
+    environment:
+      # disable registration for personal use, remove this if your instance is public
+      - ALLOW_REGISTRATION=false
+    networks:
+      - default
+      - nginx
+      - llm
+
+# this is yet another external docker bridge network to provide access from the nginx reverse proxy container
+# if your nginx (or caddy, or traefik, or whatever) is not a container then you don't need this
+networks:
+  nginx:
+    name: http-global-network
+    external: true

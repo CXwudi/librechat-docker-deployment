@@ -1,0 +1,1 @@
+docker network create -d bridge llm-http-global-network

@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  copilot-gpt4-service:
+    image: aaamoon/copilot-gpt4-service
+    container_name: copilot-gpt4-service
+    env_file:
+      - ../all-llm-keys.env # for some reason, this doesn't work in VPS
+      - gpt4.env
+    volumes:
+      - 'db:/app/db'
+    restart: unless-stopped
+    command: ["-log_level", "info"]
+    networks:
+      - default
+      - llm
+
+volumes:
+  db:
+    name: copilot-gpt4-service-db
+
+networks:
+  default:
+    name: copilot-gpt4-service-defnet
+  llm:
+    name: llm-http-global-network
+    external: true

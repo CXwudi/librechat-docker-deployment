@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  librechat:
+    ports:
+      - "5000:5000"
+
+  mongodb-express:
+    image: mongo-express
+    container_name: librechat-mongodb-express
+    env_file:
+      - env/db.env
+      - env/db.debug.env
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mongodb
+    restart: unless-stopped

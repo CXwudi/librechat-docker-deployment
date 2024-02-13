@@ -1,0 +1,63 @@
+version: '3'
+
+services:
+  librechat:
+    image: ghcr.io/danny-avila/librechat-dev
+    container_name: librechat-app
+    env_file:
+      # other pre-requisites
+      - env/permission.env
+      - env/db.env
+      - ../all-llm-keys.env
+      # librechat config
+      - env/server.env
+      - env/endpoint.env
+      - env/custom_endpoint.env
+      - env/meilisearch.env
+      - env/system.env
+    volumes:
+      - image-gen:/app/client/public/images
+      - ./librechat.yaml:/app/librechat.yaml
+    restart: unless-stopped
+    networks:
+      - default
+      - llm
+  
+  mongodb:
+    image: bitnami/mongodb # an image with simplified user creation for custom databases
+    container_name: librechat-mongodb
+    env_file:
+      - env/db.env
+    volumes:
+      - mongodb-data:/bitnami/mongodb/data
+    restart: unless-stopped
+    labels:
+      - docker-volume-backup.stop-during-backup=librechat-mongodb-data
+  
+  meilisearch:
+    image: getmeili/meilisearch
+    container_name: librechat-meilisearch
+    env_file:
+      - env/permission.env
+      - env/meilisearch.env
+    volumes:
+      - meilisearch-data:/meili_data
+    restart: unless-stopped
+    labels:
+      - docker-volume-backup.stop-during-backup=librechat-meilisearch-data
+    
+
+volumes:
+  image-gen:
+    name: librechat-image-gen
+  mongodb-data:
+    name: librechat-mongodb-data
+  meilisearch-data:
+    name: librechat-meilisearch-data
+
+networks:
+  default:
+    name: librechat-defnet
+  llm:
+    name: llm-http-global-network
+    external: true

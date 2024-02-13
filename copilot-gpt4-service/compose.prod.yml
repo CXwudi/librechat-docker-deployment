@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  copilot-gpt4-service:
+    networks:
+      - default
+      - llm
+
+networks:
+  llm:
+    name: llm-http-global-network
+    external: true

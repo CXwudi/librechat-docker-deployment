@@ -1,0 +1,1 @@
+docker compose -f compose.yml -f compose.local.yml down
