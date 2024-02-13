@@ -4,10 +4,7 @@ Although [the official docker compose deployment guide](https://docs.librechat.a
 
 ## Features
 
-This deployment uses the [prebuilt image](https://github.com/danny-avila?tab=packages&repo_name=LibreChat) with its own docker compose files.
-
-It has these features:
-
+- Using the official [prebuilt image](https://github.com/danny-avila?tab=packages&repo_name=LibreChat) to avoid running `docker build` command
 - Already provided configuration of OpenAI, Gemini, Mistral, OpenRouter, BingAI, DALLE. Just put yout API key in the `all-api-key.env` file and you are good to go
 - Enforced mongodb protection through the creation of separate database with a separate username and passwords.
 - Separate environment files for different sections of the configuration, allowing for better environment management.
@@ -28,7 +25,7 @@ Follow these steps to get your development environment set up:
 1. Clone this repository or download the ZIP file.
 2. Navigate to the project directory.
 3. Fill in your API keys in the `all-api-key.env` file.
-4. Fill in any `<  >` in [`librechat/env`](librechat/env/)
+4. (Optional but highly recommended for the best practice of security) Complete all the `# TODO` in [`librechat/env`](librechat/env/)
 
 ## Usage
 
