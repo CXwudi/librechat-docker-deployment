@@ -10,6 +10,15 @@ services:
       - nginx
       - llm
 
+  # auto-update the container, doesn't necessarily need to be in this compose.yml file, as long as it's running on the same host
+  # watchtower:
+  #   image: containrrr/watchtower
+  #   environment:
+  #     - WATCHTOWER_CLEANUP=true
+  #     - WATCHTOWER_POLL_INTERVAL=3600
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+
 # this is yet another external docker bridge network to provide access from the nginx reverse proxy container
 # if your nginx (or caddy, or traefik, or whatever) is not a container then you don't need this
 networks:
