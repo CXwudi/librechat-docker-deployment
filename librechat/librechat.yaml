@@ -1,5 +1,6 @@
 version: 1.0.1
 cache: true
+# see more config in https://docs.librechat.ai/install/configuration/ai_endpoints.html
 endpoints:
   custom:
     # Mistral AI API
@@ -34,6 +35,7 @@ endpoints:
       summaryModel: "openchat/openchat-7b:free"
       forcePrompt: false
       modelDisplayLabel: "OpenRouter"
+      dropParams: ["stop"] # OpenRouter has its own stop word for each LLM, so dropping ours from LibreChat, otherwise your LLM can not stop
 
     # Github Copilot in Local
     - name: "Github Copilot Chat"
@@ -50,3 +52,4 @@ endpoints:
       forcePrompt: false
       modelDisplayLabel: "Github Copilot"
       dropParams: ["user"]
+      
