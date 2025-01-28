@@ -31,7 +31,7 @@ Follow these steps to get your development environment set up:
 
 ### Setting up the Network
 
-First, run the `create-llm-network.sh` script to create an external bridge network. This network will be used by both `librechat` and `copilot-gpt4-service`. The network is declared as an external bridge network in both `compose.yml` files.
+Note that the "llm-http-global-network" network will be used by both `librechat` and `copilot-gpt4-service`. The network is declared as an external bridge network in both `compose.yml` files, and created when you run any of the startup shell scripts, or this command below:
 
 ```
 ./create-llm-network.sh
